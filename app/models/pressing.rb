@@ -1,0 +1,2 @@
+class Pressing < ApplicationRecord
+end

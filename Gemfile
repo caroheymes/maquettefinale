@@ -1,0 +1,37 @@
+source 'https://rubygems.org'
+ruby '2.4.2'
+
+gem 'devise'
+gem 'figaro'
+gem 'jbuilder', '~> 2.0'
+gem 'pg'
+gem 'puma'
+gem 'railties', '~> 5.0', '>= 5.0.5'
+gem 'rails', '5.0.5'
+gem 'redis'
+gem 'rails-ujs', '~> 0.1.0'
+gem "algoliasearch-rails"
+gem 'algoliasearch', '~> 1.18', '>= 1.18.5'
+gem 'json', '~> 2.1'
+gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'rake', '~> 12.3'
+gem 'rdoc', '~> 6.0'
+gem 'travis', '~> 1.8', '>= 1.8.8'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'sass-rails', '~> 5.0', '>= 5.0.4'
+gem 'simple_form'
+gem 'uglifier'
+gem 'webpacker'
+
+group :development, :test do
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
