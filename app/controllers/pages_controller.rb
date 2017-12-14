@@ -3,4 +3,7 @@ class PagesController < ApplicationController
 
   def home
   end
+  def index
+    @pressing = Pressing.all
+  end
 end

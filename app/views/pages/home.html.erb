@@ -5,3 +5,88 @@
     <a class="btn btn-treehouse btn-lg">SOS pressing <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
   </div>
 </div>
+
+
+<% content_for :pressingname do %>Trouvez comme bon vous semble<% end %>
+
+<h1>exemple de recherche</h1>
+
+<div class="well">
+  A <code>Google-like</code> instant-search results page based on <a href="https://community.algolia.com/instantsearch.js"><code>instantsearch.js</code></a>.
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <input type="text" id="q" class="form-control" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3" id="facets">
+      <div id="companies"></div>
+    </div>
+    <div class="col-sm-9" id="hits"></div>
+  </div>
+</div>
+
+
+
+<script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var hitTemplate = '<div class="hit-instant-search">' +
+      '<div class="company">{{{_highlightResult.pressingname.value}}}</div>' +
+      '<div class="name">{{{_highlightResult.geozip.value}}}</div>' +
+      '<div class="created_at">{{{_highlightResult.geocitygeocity.value}}}</div>' +
+      '<div class="created_at">{{{_highlightResult.prestations.value}}}</div>' +
+      '<div class="created_at">{{{_highlightResult.clients.value}}}</div>' +
+      //'<div class="email"><a href="mailto:{{{_highlightResult.email.value}}}">{{{_highlightResult.email.value}}}</a></div>' +
+    '</div>';
+
+    var search = instantsearch({
+      appId: '<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>',
+      apiKey: '<%= ENV['ALGOLIASEARCH_API_KEY_SEARCH'] %>',
+      indexName: '<%= Pressing.index_name %>',
+      urlSync: true
+    });
+
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#q',
+        placeholder: 'Search for contacts',
+        autofocus: false,
+        poweredBy: true
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#hits',
+        templates: {
+          empty: 'No results',
+          item: hitTemplate
+        },
+        hitsPerPage: 50
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.refinementList({
+        container: '#companies',
+        attributeName: 'pressingname',
+        limit: 50,
+        templates: {
+          header: 'Companies'
+        },
+        cssClasses: {
+          root: 'list-group',
+          item: 'list-group-item',
+          count: 'badge pull-right'
+        }
+      })
+    );
+
+    search.start();
+  });
+</script>
